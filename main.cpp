@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <windows.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include "include/stb_image.h"
 
@@ -33,5 +34,7 @@ int main() {
         std::cout << "\n";
     }
     stbi_image_free(img);
+
+    Sleep(10000);
     return 0;
 }
