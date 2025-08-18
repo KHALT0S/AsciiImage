@@ -6,15 +6,21 @@
 
 int main() {
     int width, height, channels;
-    unsigned char* img = stbi_load("image.jpg", &width, &height, &channels, 3);
+    unsigned char* img = stbi_load("images/image2.jpg", &width, &height, &channels, 3);
 
     if (!img) {
         std::cerr << "Failed to load image\n";
         return 1;
     }
 
-    int scale_x = 20; // skip every x pixels horizontally
-    int scale_y = 45; // skip every y pixels vertically
+    double scale = 100; // contruling the scale of Ascii Image (more is biger)
+    
+    double x = width/(52*(scale/100));
+    double y = height/(20*(scale/100));
+
+    int scale_x = x;  // skip every x pixels horizontally // 20
+    int scale_y = y; // skip every y pixels vertically  // 52
+
 
 
     for (int y = 0; y < height; y += scale_y) {
@@ -27,7 +33,7 @@ int main() {
             float brightness = 0.2126f*R + 0.7152f*G + 0.0722f*B;
             
             // Contrast adjustment
-            float contrast = 1.3f;    // >1 = higher contrast, <1 = lower
+            float contrast = 1.4f;    // >1 = higher contrast, <1 = lower
             float midpoint = 228.0f;  // mid gray
             brightness = (brightness - midpoint) * contrast + midpoint;
 
@@ -38,7 +44,7 @@ int main() {
             const char* gradient = " .'`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
             int grad_len = strlen(gradient);
             char c = gradient[(int)(brightness * (grad_len-1) / 255)];
-            std::cout << c;
+            std::cout << c; 
         }
         std::cout << "\n";
     }
